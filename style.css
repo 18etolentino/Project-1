@@ -59,7 +59,8 @@ body {
 .hero {
   text-align: center;
   padding: 100px 20px;
-  background-color: #f9f9f9;
+  /* Add a simple gradient background for the hero section */
+  background: linear-gradient(135deg, #e0e7ff 60%, #f0e0ff 100%);
   /* This makes the hero section at least 80% of the screen height */
   min-height: 80vh; /* Hero section covers 80% of the screen height */
   display: flex;
