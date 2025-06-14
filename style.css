@@ -59,35 +59,50 @@ body {
 .hero {
   text-align: center;
   padding: 100px 20px;
-  /* Add a simple gradient background for the hero section */
-  background: linear-gradient(135deg, #e0e7ff 60%, #f0e0ff 100%);
-  /* This makes the hero section at least 80% of the screen height */
-  min-height: 80vh; /* Hero section covers 80% of the screen height */
+  min-height: 80vh;
   display: flex;
   flex-direction: column;
-  justify-content: center; /* Center content vertically */
-  align-items: center;     /* Center content horizontally */
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #3538e4 0%, #e57a2d 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 10s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* Make the main heading (h1) very large and use Playfair Display */
 .hero h1 {
-  font-size: 4rem; /* Very large heading for strong impact */
+  font-size: 4.5rem; /* Very large heading for strong impact */
   font-family: 'Playfair Display', serif; /* Use Playfair Display for the hero title */
+  color: #ffffff;
   margin-bottom: 16px;
   /* You can adjust the size if you want it even bigger */
 }
 
 .hero p {
-  font-size: 1.2em;
-  color: #555;
+  font-size: 1.1em;
+  color: #ffffff;
 }
 
 .cta-button {
   display: inline-block;
   margin-top: 20px;
   padding: 10px 20px;
-  background-color: #333;
-  color: white;
+  background-color: #ffffff33;
+  color: rgb(255, 255, 255);
   border-radius: 5px;
   text-decoration: none;
   font-weight: 500;
