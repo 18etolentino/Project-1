@@ -11,8 +11,6 @@
 </head>
 <body>
 
-  <div class="page-transition-overlay" id="pageOverlay"></div>
-
   <nav class="nav nav--dark" id="nav">
     <a href="index.html" class="nav-monogram">ET</a>
     <ul class="nav-links">
@@ -151,27 +149,6 @@
         hamburger.classList.remove('open');
         mobileMenu.classList.remove('open');
       });
-    });
-
-    // Page transition — gradient wipe when clicking "See My Work"
-    const overlay = document.getElementById('pageOverlay');
-
-    function transitionTo(url) {
-      overlay.classList.add('slide-up');
-      setTimeout(() => { window.location.href = url; }, 600);
-    }
-
-    // Intercept See My Work button
-    document.querySelector('.btn-hero').addEventListener('click', (e) => {
-      e.preventDefault();
-      transitionTo('work.html');
-    });
-
-    // On page load — if coming back, slide overlay away
-    window.addEventListener('pageshow', () => {
-      overlay.classList.remove('slide-up');
-      overlay.classList.add('slide-away');
-      setTimeout(() => overlay.classList.remove('slide-away'), 700);
     });
   </script>
 

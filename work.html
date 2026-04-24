@@ -57,8 +57,6 @@
 </head>
 <body>
 
-  <div class="page-transition-overlay slide-up" id="pageOverlay"></div>
-
   <nav class="nav nav--dark" id="nav">
     <a href="index.html" class="nav-monogram">ET</a>
     <ul class="nav-links">
@@ -234,17 +232,6 @@
   </div><!-- end .work-page-wrap -->
 
   <script>
-    // ── Entry transition ───────────────────────────────────
-    const overlay = document.getElementById('pageOverlay');
-    window.addEventListener('load', () => {
-      requestAnimationFrame(() => {
-        overlay.style.transition = 'transform 0.7s cubic-bezier(0.76, 0, 0.24, 1)';
-        overlay.classList.remove('slide-up');
-        overlay.classList.add('slide-away');
-        setTimeout(() => overlay.classList.remove('slide-away'), 800);
-      });
-    });
-
     // ── Hamburger ──────────────────────────────────────────
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
