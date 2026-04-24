@@ -19,7 +19,17 @@
       <li><a href="resume.html" class="nav-link">Resume</a></li>
       <li><a href="about.html" class="nav-link">About</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="work.html">Work</a>
+    <a href="resume.html">Resume</a>
+    <a href="about.html">About</a>
+  </div>
 
   <!-- HERO -->
   <div class="case-hero listo-hero">
@@ -143,6 +153,21 @@
       <span>© 2026 Evelin Tolentino</span>
     </div>
   </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+  </script>
 
 </body>
 </html>

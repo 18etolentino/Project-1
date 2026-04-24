@@ -11,6 +11,8 @@
 </head>
 <body>
 
+  <div class="page-transition-overlay" id="pageOverlay"></div>
+
   <nav class="nav nav--dark" id="nav">
     <a href="index.html" class="nav-monogram">ET</a>
     <ul class="nav-links">
@@ -19,7 +21,17 @@
       <li><a href="resume.html" class="nav-link">Resume</a></li>
       <li><a href="about.html" class="nav-link">About</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">Home</a>
+    <a href="work.html">Work</a>
+    <a href="resume.html">Resume</a>
+    <a href="about.html">About</a>
+  </div>
 
   <section class="hero">
     <p class="hero-eyebrow">UX Researcher &amp; Product Designer</p>
@@ -30,6 +42,7 @@
 
   <section class="projects-home">
 
+    <!-- 1: Listo — color block left, text right -->
     <div class="project-row">
       <div class="project-row__image">
         <div class="project-color-block listo-bg">
@@ -45,13 +58,18 @@
       </div>
     </div>
 
-    <div class="project-row" style="direction: rtl;">
+    <!-- 2: SHEIN — text left, black/white graphic right -->
+    <div class="project-row flip">
       <div class="project-row__image">
         <div class="project-color-block shein-bg">
-          <span class="project-color-label">SHEIN</span>
+          <div class="shein-graphic">
+            <span class="shein-graphic__word">CIRCULAR.</span>
+            <div class="shein-graphic__bar"></div>
+            <span class="shein-graphic__sub">Fast Fashion Redesigned</span>
+          </div>
         </div>
       </div>
-      <div class="project-row__text" style="direction: ltr;">
+      <div class="project-row__text">
         <span class="project-tag">Behavioral Design · Quantitative Research · Systems</span>
         <h2 class="project-title">SHEIN Circular Ecosystem Redesign</h2>
         <p class="project-desc">Research-backed redesign applying behavioral economics to fast fashion. Built on a primary correlational study (N=95, r=−0.230, p=.025) proving compulsive buying decreases wellbeing.</p>
@@ -60,11 +78,10 @@
       </div>
     </div>
 
+    <!-- 3: Morehouse — real photo left, text right -->
     <div class="project-row">
       <div class="project-row__image">
-        <div class="project-color-block morehouse-bg">
-          <span class="project-color-label">Morehouse</span>
-        </div>
+        <img src="img/morehouse-cover.jpg" alt="Morehouse Crafted Interiors — luxury kitchen interior" />
       </div>
       <div class="project-row__text">
         <span class="project-tag">UX Audit · Real Client · UX Writing</span>
@@ -75,13 +92,12 @@
       </div>
     </div>
 
-    <div class="project-row" style="direction: rtl;">
+    <!-- 4: L'Oréal — text left, real photo right -->
+    <div class="project-row flip">
       <div class="project-row__image">
-        <div class="project-color-block loreal-bg">
-          <span class="project-color-label">L'Oréal</span>
-        </div>
+        <img src="img/loreal-cover.jpg" alt="L'Oréal AI Routine Builder — beauty tech" />
       </div>
-      <div class="project-row__text" style="direction: ltr;">
+      <div class="project-row__text">
         <span class="project-tag">AI Integration · Frontend Dev · Shipped Product</span>
         <h2 class="project-title">L'Oréal AI Routine Builder</h2>
         <p class="project-desc">Designed and developed a product-aware AI chatbot using real L'Oréal brand data and the OpenAI API. Users browse products and receive personalized skincare routines through multi-turn conversation.</p>
@@ -114,18 +130,49 @@
   </footer>
 
   <script>
+    // Nav dark/light on scroll
     const nav = document.getElementById('nav');
     const hero = document.querySelector('.hero');
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        nav.classList.add('nav--dark');
-        nav.classList.remove('nav--light');
-      } else {
-        nav.classList.remove('nav--dark');
-        nav.classList.add('nav--light');
-      }
+    const observer = new IntersectionObserver(([e]) => {
+      nav.classList.toggle('nav--dark', e.isIntersecting);
+      nav.classList.toggle('nav--light', !e.isIntersecting);
     }, { threshold: 0.1 });
     observer.observe(hero);
+
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+      });
+    });
+
+    // Page transition — gradient wipe when clicking "See My Work"
+    const overlay = document.getElementById('pageOverlay');
+
+    function transitionTo(url) {
+      overlay.classList.add('slide-up');
+      setTimeout(() => { window.location.href = url; }, 600);
+    }
+
+    // Intercept See My Work button
+    document.querySelector('.btn-hero').addEventListener('click', (e) => {
+      e.preventDefault();
+      transitionTo('work.html');
+    });
+
+    // On page load — if coming back, slide overlay away
+    window.addEventListener('pageshow', () => {
+      overlay.classList.remove('slide-up');
+      overlay.classList.add('slide-away');
+      setTimeout(() => overlay.classList.remove('slide-away'), 700);
+    });
   </script>
 
 </body>
